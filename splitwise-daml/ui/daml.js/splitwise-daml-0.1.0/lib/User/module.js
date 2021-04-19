@@ -15,6 +15,47 @@ var damlLedger = require('@daml/ledger');
 var pkgd14e08374fc7197d6a0de468c968ae8ba3aadbf9315476fd39071831f5923662 = require('@daml.js/d14e08374fc7197d6a0de468c968ae8ba3aadbf9315476fd39071831f5923662');
 
 
+exports.Transaction = {
+  templateId: '86afcffc147a68f3733bd5d0a41a337647cd5d4e3b83c191bf07590521263129:User:Transaction',
+  keyDecoder: damlTypes.lazyMemo(function () { return jtv.constant(undefined); }),
+  keyEncode: function () { throw 'EncodeError'; },
+  decoder: damlTypes.lazyMemo(function () { return jtv.object({lender: damlTypes.Party.decoder, borrower: damlTypes.Party.decoder, amount: damlTypes.Numeric(2).decoder, }); }),
+  encode: function (__typed__) {
+  return {
+    lender: damlTypes.Party.encode(__typed__.lender),
+    borrower: damlTypes.Party.encode(__typed__.borrower),
+    amount: damlTypes.Numeric(2).encode(__typed__.amount),
+  };
+}
+,
+  Archive: {
+    template: function () { return exports.Transaction; },
+    choiceName: 'Archive',
+    argumentDecoder: damlTypes.lazyMemo(function () { return pkgd14e08374fc7197d6a0de468c968ae8ba3aadbf9315476fd39071831f5923662.DA.Internal.Template.Archive.decoder; }),
+    argumentEncode: function (__typed__) { return pkgd14e08374fc7197d6a0de468c968ae8ba3aadbf9315476fd39071831f5923662.DA.Internal.Template.Archive.encode(__typed__); },
+    resultDecoder: damlTypes.lazyMemo(function () { return damlTypes.Unit.decoder; }),
+    resultEncode: function (__typed__) { return damlTypes.Unit.encode(__typed__); },
+  },
+};
+
+
+damlTypes.registerTemplate(exports.Transaction);
+
+
+
+exports.MakeTransaction = {
+  decoder: damlTypes.lazyMemo(function () { return jtv.object({lender: damlTypes.Party.decoder, amount: damlTypes.Numeric(2).decoder, }); }),
+  encode: function (__typed__) {
+  return {
+    lender: damlTypes.Party.encode(__typed__.lender),
+    amount: damlTypes.Numeric(2).encode(__typed__.amount),
+  };
+}
+,
+};
+
+
+
 exports.Follow = {
   decoder: damlTypes.lazyMemo(function () { return jtv.object({userToFollow: damlTypes.Party.decoder, }); }),
   encode: function (__typed__) {
@@ -28,7 +69,7 @@ exports.Follow = {
 
 
 exports.User = {
-  templateId: 'd4e880f64b7cbfa01244d125ff60dacc78bc830d6c6e7046eb98f8a550a5d971:User:User',
+  templateId: '86afcffc147a68f3733bd5d0a41a337647cd5d4e3b83c191bf07590521263129:User:User',
   keyDecoder: damlTypes.lazyMemo(function () { return damlTypes.lazyMemo(function () { return damlTypes.Party.decoder; }); }),
   keyEncode: function (__typed__) { return damlTypes.Party.encode(__typed__); },
   decoder: damlTypes.lazyMemo(function () { return jtv.object({username: damlTypes.Party.decoder, following: damlTypes.List(damlTypes.Party).decoder, }); }),
@@ -54,6 +95,14 @@ exports.User = {
     argumentEncode: function (__typed__) { return exports.Follow.encode(__typed__); },
     resultDecoder: damlTypes.lazyMemo(function () { return damlTypes.ContractId(exports.User).decoder; }),
     resultEncode: function (__typed__) { return damlTypes.ContractId(exports.User).encode(__typed__); },
+  },
+  MakeTransaction: {
+    template: function () { return exports.User; },
+    choiceName: 'MakeTransaction',
+    argumentDecoder: damlTypes.lazyMemo(function () { return exports.MakeTransaction.decoder; }),
+    argumentEncode: function (__typed__) { return exports.MakeTransaction.encode(__typed__); },
+    resultDecoder: damlTypes.lazyMemo(function () { return damlTypes.ContractId(exports.Transaction).decoder; }),
+    resultEncode: function (__typed__) { return damlTypes.ContractId(exports.Transaction).encode(__typed__); },
   },
 };
 

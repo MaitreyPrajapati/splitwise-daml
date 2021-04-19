@@ -1,10 +1,2 @@
 module Transaction where
 
--- TRANSACTION TEMPLATE
-template Transaction with
-    sender: Party
-    receiver: Party
-    amount: Numeric 2
-  where
-    signatory sender, receiver
-        

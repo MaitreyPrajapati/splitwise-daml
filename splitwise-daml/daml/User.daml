@@ -25,3 +25,21 @@ template User with
         archive self
         create this with following = userToFollow :: following
     -- FOLLOW_END
+    
+    nonconsuming choice MakeTransaction: ContractId Transaction with
+        lender: Party
+        amount: Numeric 2
+      controller lender
+      do
+        assertMsg "You cannot make a transaction with yourself" (lender /= username)
+        assertMsg "You can't make a transaction with a person whom you don't follow" (elem lender following)
+        create Transaction with lender, borrower=username, amount
+
+-- TRANSACTION TEMPLATE
+template Transaction with
+    lender: Party
+    borrower: Party
+    amount: Numeric 2
+  where
+    signatory lender, borrower
+        
