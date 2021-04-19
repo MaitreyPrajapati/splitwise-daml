@@ -42,7 +42,7 @@ const MessageEdit: React.FC<Props> = ({ followers }) => {
       <Form.Dropdown
         selection
         className="test-select-message-receiver"
-        placeholder="Select a follower"
+        placeholder="Select your friend"
         options={followers.map((follower) => ({
           key: follower,
           text: follower,
@@ -55,7 +55,7 @@ const MessageEdit: React.FC<Props> = ({ followers }) => {
       />
       <Form.Input
         className="test-select-message-content"
-        placeholder="Write a message"
+        placeholder="Enter an amount"
         value={amount}
         onChange={(event) => setAmount(event.currentTarget.value)}
       />

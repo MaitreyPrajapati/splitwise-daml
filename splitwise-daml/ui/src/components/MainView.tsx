@@ -71,7 +71,6 @@ const MainView: React.FC = () => {
             >
               {myUser ? `Welcome, ${myUser.username}!` : "Loading..."}
             </Header>
-
             <Segment>
               <Header as="h2">
                 <Icon name="user" />

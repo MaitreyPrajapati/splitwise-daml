@@ -16,7 +16,7 @@ export declare type Transaction = {
 };
 
 export declare const Transaction:
-  damlTypes.Template<Transaction, undefined, '86afcffc147a68f3733bd5d0a41a337647cd5d4e3b83c191bf07590521263129:User:Transaction'> & {
+  damlTypes.Template<Transaction, undefined, '176e94e6dc181f08516d3fa9a9052a345ef6315fbd4524b494acf85bf107caf6:User:Transaction'> & {
   Archive: damlTypes.Choice<Transaction, pkgd14e08374fc7197d6a0de468c968ae8ba3aadbf9315476fd39071831f5923662.DA.Internal.Template.Archive, {}, undefined>;
 };
 
@@ -56,7 +56,7 @@ export declare type User = {
 };
 
 export declare const User:
-  damlTypes.Template<User, User.Key, '86afcffc147a68f3733bd5d0a41a337647cd5d4e3b83c191bf07590521263129:User:User'> & {
+  damlTypes.Template<User, User.Key, '176e94e6dc181f08516d3fa9a9052a345ef6315fbd4524b494acf85bf107caf6:User:User'> & {
   Archive: damlTypes.Choice<User, pkgd14e08374fc7197d6a0de468c968ae8ba3aadbf9315476fd39071831f5923662.DA.Internal.Template.Archive, {}, User.Key>;
   Follow: damlTypes.Choice<User, Follow, damlTypes.ContractId<User>, User.Key>;
   MakeTransaction: damlTypes.Choice<User, MakeTransaction, damlTypes.ContractId<Transaction>, User.Key>;

@@ -16,7 +16,7 @@ var pkgd14e08374fc7197d6a0de468c968ae8ba3aadbf9315476fd39071831f5923662 = requir
 
 
 exports.Transaction = {
-  templateId: '86afcffc147a68f3733bd5d0a41a337647cd5d4e3b83c191bf07590521263129:User:Transaction',
+  templateId: '176e94e6dc181f08516d3fa9a9052a345ef6315fbd4524b494acf85bf107caf6:User:Transaction',
   keyDecoder: damlTypes.lazyMemo(function () { return jtv.constant(undefined); }),
   keyEncode: function () { throw 'EncodeError'; },
   decoder: damlTypes.lazyMemo(function () { return jtv.object({lender: damlTypes.Party.decoder, borrower: damlTypes.Party.decoder, amount: damlTypes.Numeric(2).decoder, }); }),
@@ -69,7 +69,7 @@ exports.Follow = {
 
 
 exports.User = {
-  templateId: '86afcffc147a68f3733bd5d0a41a337647cd5d4e3b83c191bf07590521263129:User:User',
+  templateId: '176e94e6dc181f08516d3fa9a9052a345ef6315fbd4524b494acf85bf107caf6:User:User',
   keyDecoder: damlTypes.lazyMemo(function () { return damlTypes.lazyMemo(function () { return damlTypes.Party.decoder; }); }),
   keyEncode: function (__typed__) { return damlTypes.Party.encode(__typed__); },
   decoder: damlTypes.lazyMemo(function () { return jtv.object({username: damlTypes.Party.decoder, following: damlTypes.List(damlTypes.Party).decoder, }); }),
