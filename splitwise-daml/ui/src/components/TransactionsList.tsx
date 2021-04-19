@@ -43,7 +43,9 @@ const TransactionList: React.FC = () => {
           </ListItem>
         );
       })}
-      <h3 style={{ color: debtStatus(netValue) }}>You owe $ {netValue}.</h3>;
+      <h3 style={{ color: debtStatus(netValue) }}>
+        You {netValue <= 0 ? "owe" : "are owed"} $ {netValue}.
+      </h3>
     </List>
   );
 };

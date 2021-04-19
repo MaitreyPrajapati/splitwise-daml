@@ -59,7 +59,7 @@ const MainView: React.FC = () => {
 
   return (
     <Container>
-      <Grid centered columns={2}>
+      <Grid centered columns={3}>
         <Grid.Row stretched>
           <Grid.Column>
             <Header
@@ -71,6 +71,10 @@ const MainView: React.FC = () => {
             >
               {myUser ? `Welcome, ${myUser.username}!` : "Loading..."}
             </Header>
+          </Grid.Column>
+        </Grid.Row>
+        <Grid.Row stretched>
+          <Grid.Column>
             <Segment>
               <Header as="h2">
                 <Icon name="user" />
@@ -85,6 +89,8 @@ const MainView: React.FC = () => {
                 onAddParty={follow}
               />
             </Segment>
+          </Grid.Column>
+          <Grid.Column>
             <Segment>
               <Header as="h2">
                 <Icon name="globe" />
@@ -100,6 +106,8 @@ const MainView: React.FC = () => {
               <UserList users={followers} onFollow={follow} />
               {/* USERLIST_END */}
             </Segment>
+          </Grid.Column>
+          <Grid.Column>
             <Segment>
               <Header as="h2">
                 <Icon name="pencil square" />
