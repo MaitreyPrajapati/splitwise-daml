@@ -1,2 +1,16 @@
 module Transaction where
 
+-- TRANSACTION TEMPLATE
+template Transaction with
+    lender: Party
+    borrower: Party
+    amount: Numeric 2
+  where
+    signatory lender
+    observer borrower
+
+    nonconsuming choice DeleteTransaction: () with
+      controller lender
+      do
+        archive self
+        

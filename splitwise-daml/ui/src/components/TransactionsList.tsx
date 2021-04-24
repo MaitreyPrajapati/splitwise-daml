@@ -1,6 +1,7 @@
 import React from "react";
 import { List, ListItem } from "semantic-ui-react";
 import { User } from "@daml.js/splitwise-daml";
+import { Transaction } from "@daml.js/splitwise-daml";
 import { useStreamQuery, useStreamFetchByKeys, useParty } from "@daml/react";
 
 /**
@@ -8,7 +9,7 @@ import { useStreamQuery, useStreamFetchByKeys, useParty } from "@daml/react";
  */
 
 const TransactionList: React.FC = () => {
-  const allTransactions = useStreamQuery(User.Transaction);
+  const allTransactions = useStreamQuery(Transaction.Transaction);
   const username = useParty();
   const myUserResult = useStreamFetchByKeys(User.User, () => [username], [
     username,
@@ -44,7 +45,8 @@ const TransactionList: React.FC = () => {
         );
       })}
       <h3 style={{ color: debtStatus(netValue) }}>
-        You {netValue <= 0 ? "owe" : "are owed"} $ {netValue}.
+        You {netValue <= 0 ? "owe" : "are owed"} ${" "}
+        {netValue <= 0 ? -netValue : netValue}.
       </h3>
     </List>
   );

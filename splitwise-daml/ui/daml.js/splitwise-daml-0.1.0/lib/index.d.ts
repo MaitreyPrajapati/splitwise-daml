@@ -1,3 +1,5 @@
+import * as Transaction from './Transaction';
+export { Transaction } ;
 import * as User from './User';
 export { User } ;
-export declare const packageId = '176e94e6dc181f08516d3fa9a9052a345ef6315fbd4524b494acf85bf107caf6';
+export declare const packageId = '5c83130736076f7c4d74bf04510317d4df8db68d5ad00b11fd50d5a0c52948e9';

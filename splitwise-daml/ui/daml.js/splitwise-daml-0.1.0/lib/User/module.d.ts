@@ -9,25 +9,7 @@ import * as damlLedger from '@daml/ledger';
 
 import * as pkgd14e08374fc7197d6a0de468c968ae8ba3aadbf9315476fd39071831f5923662 from '@daml.js/d14e08374fc7197d6a0de468c968ae8ba3aadbf9315476fd39071831f5923662';
 
-export declare type Transaction = {
-  lender: damlTypes.Party;
-  borrower: damlTypes.Party;
-  amount: damlTypes.Numeric;
-};
-
-export declare const Transaction:
-  damlTypes.Template<Transaction, undefined, '176e94e6dc181f08516d3fa9a9052a345ef6315fbd4524b494acf85bf107caf6:User:Transaction'> & {
-  Archive: damlTypes.Choice<Transaction, pkgd14e08374fc7197d6a0de468c968ae8ba3aadbf9315476fd39071831f5923662.DA.Internal.Template.Archive, {}, undefined>;
-};
-
-export declare namespace Transaction {
-  export type CreateEvent = damlLedger.CreateEvent<Transaction, undefined, typeof Transaction.templateId>
-  export type ArchiveEvent = damlLedger.ArchiveEvent<Transaction, typeof Transaction.templateId>
-  export type Event = damlLedger.Event<Transaction, undefined, typeof Transaction.templateId>
-  export type QueryResult = damlLedger.QueryResult<Transaction, undefined, typeof Transaction.templateId>
-}
-
-
+import * as Transaction from '../Transaction/module';
 
 export declare type MakeTransaction = {
   lender: damlTypes.Party;
@@ -56,10 +38,10 @@ export declare type User = {
 };
 
 export declare const User:
-  damlTypes.Template<User, User.Key, '176e94e6dc181f08516d3fa9a9052a345ef6315fbd4524b494acf85bf107caf6:User:User'> & {
-  Archive: damlTypes.Choice<User, pkgd14e08374fc7197d6a0de468c968ae8ba3aadbf9315476fd39071831f5923662.DA.Internal.Template.Archive, {}, User.Key>;
+  damlTypes.Template<User, User.Key, '5c83130736076f7c4d74bf04510317d4df8db68d5ad00b11fd50d5a0c52948e9:User:User'> & {
   Follow: damlTypes.Choice<User, Follow, damlTypes.ContractId<User>, User.Key>;
-  MakeTransaction: damlTypes.Choice<User, MakeTransaction, damlTypes.ContractId<Transaction>, User.Key>;
+  Archive: damlTypes.Choice<User, pkgd14e08374fc7197d6a0de468c968ae8ba3aadbf9315476fd39071831f5923662.DA.Internal.Template.Archive, {}, User.Key>;
+  MakeTransaction: damlTypes.Choice<User, MakeTransaction, damlTypes.ContractId<Transaction.Transaction>, User.Key>;
 };
 
 export declare namespace User {
