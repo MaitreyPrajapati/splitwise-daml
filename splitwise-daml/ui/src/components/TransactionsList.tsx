@@ -1,8 +1,13 @@
 import React from "react";
-import { List, ListItem } from "semantic-ui-react";
-import { User } from "@daml.js/splitwise-daml";
-import { Transaction } from "@daml.js/splitwise-daml";
-import { useStreamQuery, useStreamFetchByKeys, useParty } from "@daml/react";
+import { Icon, List, ListItem } from "semantic-ui-react";
+import { User, Transaction } from "@daml.js/splitwise-daml";
+import { ContractId } from "@daml/types";
+import {
+  useStreamQuery,
+  useStreamFetchByKeys,
+  useParty,
+  useLedger,
+} from "@daml/react";
 
 /**
  * React component displaying the list of messages for the current user.
@@ -15,10 +20,16 @@ const TransactionList: React.FC = () => {
     username,
   ]);
   const myUser = myUserResult.contracts[0]?.payload;
+  const ledger = useLedger();
+
   let netValue = 0;
 
   const debtStatus = (debt: Number) => {
     return debt < 0 ? "red" : "green";
+  };
+
+  const deleteTransaction = async (transactionContractId: any) => {
+    console.log(transactionContractId, typeof transactionContractId);
   };
 
   return (
@@ -41,6 +52,17 @@ const TransactionList: React.FC = () => {
               {lender} &rarr; {borrower}:
             </strong>{" "}
             {amount}
+            {myUser && myUser.username === lender ? (
+              <List.Content floated="right">
+                <Icon
+                  name="delete"
+                  link
+                  onClick={() => deleteTransaction(transaction.contractId)}
+                ></Icon>
+              </List.Content>
+            ) : (
+              ""
+            )}
           </ListItem>
         );
       })}
