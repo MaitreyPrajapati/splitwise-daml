@@ -28,8 +28,12 @@ const TransactionList: React.FC = () => {
     return debt < 0 ? "red" : "green";
   };
 
-  const deleteTransaction = async (transactionContractId: any) => {
-    console.log(transactionContractId, typeof transactionContractId);
+  // Delete a contract
+  const deleteTransaction = async (transactionContractId: string) => {
+    const archiveEvent = await ledger.archive(
+      Transaction.Transaction,
+      JSON.parse(JSON.stringify(transactionContractId))
+    );
   };
 
   return (
