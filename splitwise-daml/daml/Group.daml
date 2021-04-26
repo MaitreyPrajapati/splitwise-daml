@@ -9,6 +9,9 @@ template Group with
   where
     signatory lender
 
+    key lender: Party
+    maintainer key
+
     nonconsuming choice MakeGroupTransaction: () with
         currGroupName: Text
         totalAmount: Decimal

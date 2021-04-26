@@ -50,9 +50,9 @@ const MessageEdit: React.FC<Props> = ({ followers, allGroups }) => {
         return;
       }
       setIsSubmitting(true);
-      await ledger.exerciseByKey(User.User.MakeTransaction, lender, {
-        currGroupName: borrower,
-        totalAmount: amount,
+      await ledger.exerciseByKey(User.User.MakeTransaction, borrower, {
+        lender,
+        amount,
       });
       setAmount("");
     } catch (error) {
@@ -72,9 +72,9 @@ const MessageEdit: React.FC<Props> = ({ followers, allGroups }) => {
         return;
       }
       setIsSubmitting(true);
-      await ledger.exerciseByKey(Group.Group.MakeGroupTransaction, borrower, {
-        lender,
-        amount,
+      await ledger.exerciseByKey(Group.Group.MakeGroupTransaction, lender, {
+        currGroupName: borrower,
+        totalAmount: amount,
       });
       setAmount("");
     } catch (error) {
@@ -82,6 +82,7 @@ const MessageEdit: React.FC<Props> = ({ followers, allGroups }) => {
     } finally {
       setIsSubmitting(false);
       setIsGroup(false);
+      setBorrower("");
     }
   };
 
