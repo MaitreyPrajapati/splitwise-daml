@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Form, Icon, List, ListItem } from "semantic-ui-react";
-import { User, Transaction } from "@daml.js/splitwise-daml";
+import { User, Transaction, Group } from "@daml.js/splitwise-daml";
 import { ContractId, Party } from "@daml/types";
 import {
   useStreamQuery,
@@ -28,12 +28,25 @@ const GroupBox: React.FC<Props> = ({ followers }) => {
   }));
 
   const addToSelect = async (event: any) => {
-    const newGroupMembers = event.map((follower: any) => follower.key);
+    const newGroupMembers = event.map((follower: any) => follower.value);
     setIsSelected((prev) => newGroupMembers);
   };
 
-  const submitMessage = () => {
-    console.log(isSelected);
+  const submitMessage = async (event: React.FormEvent) => {
+    event.preventDefault();
+
+    try {
+      await ledger.create(Group.Group, {
+        lender,
+        groupName: groupName,
+        involvedParties: isSelected,
+      });
+    } catch (error) {
+      console.log("error", error);
+    } finally {
+      setGroupName("");
+      setIsSelected([]);
+    }
   };
 
   return (
@@ -49,7 +62,6 @@ const GroupBox: React.FC<Props> = ({ followers }) => {
         className="test-select-message-content"
         placeholder="Group name"
         onChange={(event: any) => {
-          console.log(event);
           setGroupName(event.currentTarget.value);
         }}
       />

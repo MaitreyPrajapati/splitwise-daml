@@ -1,0 +1,28 @@
+module Group where
+
+import Transaction
+
+template Group with
+    lender: Party
+    involvedParties: [Party]
+    groupName : Text
+  where
+    signatory lender
+
+    nonconsuming choice MakeGroupTransaction: () with
+        currGroupName: Text
+        totalAmount: Decimal
+      controller lender
+      do
+        assertMsg "There is something wrong with the group selection" (currGroupName == groupName)
+        let individualAmount = totalAmount / (intToDecimal (length involvedParties))
+        forA involvedParties $ \borrower -> create Transaction with lender=lender, borrower=borrower, amount=individualAmount       
+        return ()
+
+      
+
+
+
+
+
+        

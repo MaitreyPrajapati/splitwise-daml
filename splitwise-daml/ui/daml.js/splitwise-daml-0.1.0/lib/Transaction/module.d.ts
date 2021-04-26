@@ -16,7 +16,7 @@ export declare type Transaction = {
 };
 
 export declare const Transaction:
-  damlTypes.Template<Transaction, undefined, '3e1ff153922426dd892a88edb76ce5152b4a4ce97cf97939000e6b5b025557cc:Transaction:Transaction'> & {
+  damlTypes.Template<Transaction, undefined, '5a532bde2939749e2f607147a14d150629664801770d0d97989514922c29b7cb:Transaction:Transaction'> & {
   Archive: damlTypes.Choice<Transaction, pkgd14e08374fc7197d6a0de468c968ae8ba3aadbf9315476fd39071831f5923662.DA.Internal.Template.Archive, {}, undefined>;
 };
 

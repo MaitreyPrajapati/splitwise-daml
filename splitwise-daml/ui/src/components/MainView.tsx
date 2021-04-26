@@ -11,7 +11,7 @@ import {
   Divider,
 } from "semantic-ui-react";
 import { Party } from "@daml/types";
-import { User } from "@daml.js/splitwise-daml";
+import { User, Group } from "@daml.js/splitwise-daml";
 import {
   useParty,
   useLedger,
@@ -44,7 +44,15 @@ const MainView: React.FC = () => {
     [allUsers, username]
   );
 
-  // FOLLOW_BEGIN
+  const allGroupContracts = useStreamQueries(Group.Group).contracts;
+  const allGroups = allGroupContracts.map((group) => group.payload);
+
+  // const allGroups = useMemo(
+  //   () =>
+  //     allGroupContracts
+  //       .map((group) => group.payload)
+  //   [allUsers, username]
+  // );
   const ledger = useLedger();
 
   const follow = async (userToFollow: Party): Promise<boolean> => {
@@ -123,6 +131,7 @@ const MainView: React.FC = () => {
               </Header>
               <TransactionBox
                 followers={followers.map((follower) => follower.username)}
+                allGroups={allGroups}
               />
               <Divider />
               <TransactionList />

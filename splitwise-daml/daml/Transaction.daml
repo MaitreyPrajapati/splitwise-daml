@@ -4,7 +4,7 @@ module Transaction where
 template Transaction with
     lender: Party
     borrower: Party
-    amount: Numeric 2
+    amount: Decimal
   where
     signatory lender
     observer borrower

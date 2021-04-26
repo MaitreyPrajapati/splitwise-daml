@@ -29,7 +29,7 @@ template User with
     
     nonconsuming choice MakeTransaction: ContractId Transaction with
         lender: Party
-        amount: Numeric 2
+        amount: Decimal
       controller lender
       do
         assertMsg "You cannot make a transaction with yourself" (lender /= username)

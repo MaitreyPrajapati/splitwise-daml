@@ -18,11 +18,11 @@ var Transaction = require('../Transaction/module');
 
 
 exports.MakeTransaction = {
-  decoder: damlTypes.lazyMemo(function () { return jtv.object({lender: damlTypes.Party.decoder, amount: damlTypes.Numeric(2).decoder, }); }),
+  decoder: damlTypes.lazyMemo(function () { return jtv.object({lender: damlTypes.Party.decoder, amount: damlTypes.Numeric(10).decoder, }); }),
   encode: function (__typed__) {
   return {
     lender: damlTypes.Party.encode(__typed__.lender),
-    amount: damlTypes.Numeric(2).encode(__typed__.amount),
+    amount: damlTypes.Numeric(10).encode(__typed__.amount),
   };
 }
 ,
@@ -43,7 +43,7 @@ exports.Follow = {
 
 
 exports.User = {
-  templateId: '3e1ff153922426dd892a88edb76ce5152b4a4ce97cf97939000e6b5b025557cc:User:User',
+  templateId: '5a532bde2939749e2f607147a14d150629664801770d0d97989514922c29b7cb:User:User',
   keyDecoder: damlTypes.lazyMemo(function () { return damlTypes.lazyMemo(function () { return damlTypes.Party.decoder; }); }),
   keyEncode: function (__typed__) { return damlTypes.Party.encode(__typed__); },
   decoder: damlTypes.lazyMemo(function () { return jtv.object({username: damlTypes.Party.decoder, following: damlTypes.List(damlTypes.Party).decoder, }); }),
