@@ -15,21 +15,20 @@ var damlLedger = require('@daml/ledger');
 var pkgd14e08374fc7197d6a0de468c968ae8ba3aadbf9315476fd39071831f5923662 = require('@daml.js/d14e08374fc7197d6a0de468c968ae8ba3aadbf9315476fd39071831f5923662');
 
 
-exports.Transaction = {
-  templateId: '3e1ff153922426dd892a88edb76ce5152b4a4ce97cf97939000e6b5b025557cc:Transaction:Transaction',
+exports.Group = {
+  templateId: '3e1ff153922426dd892a88edb76ce5152b4a4ce97cf97939000e6b5b025557cc:Groups:Group',
   keyDecoder: damlTypes.lazyMemo(function () { return jtv.constant(undefined); }),
   keyEncode: function () { throw 'EncodeError'; },
-  decoder: damlTypes.lazyMemo(function () { return jtv.object({lender: damlTypes.Party.decoder, borrower: damlTypes.Party.decoder, amount: damlTypes.Numeric(2).decoder, }); }),
+  decoder: damlTypes.lazyMemo(function () { return jtv.object({lender: damlTypes.Party.decoder, involvedParties: damlTypes.List(damlTypes.Party).decoder, }); }),
   encode: function (__typed__) {
   return {
     lender: damlTypes.Party.encode(__typed__.lender),
-    borrower: damlTypes.Party.encode(__typed__.borrower),
-    amount: damlTypes.Numeric(2).encode(__typed__.amount),
+    involvedParties: damlTypes.List(damlTypes.Party).encode(__typed__.involvedParties),
   };
 }
 ,
   Archive: {
-    template: function () { return exports.Transaction; },
+    template: function () { return exports.Group; },
     choiceName: 'Archive',
     argumentDecoder: damlTypes.lazyMemo(function () { return pkgd14e08374fc7197d6a0de468c968ae8ba3aadbf9315476fd39071831f5923662.DA.Internal.Template.Archive.decoder; }),
     argumentEncode: function (__typed__) { return pkgd14e08374fc7197d6a0de468c968ae8ba3aadbf9315476fd39071831f5923662.DA.Internal.Template.Archive.encode(__typed__); },
@@ -39,5 +38,5 @@ exports.Transaction = {
 };
 
 
-damlTypes.registerTemplate(exports.Transaction);
+damlTypes.registerTemplate(exports.Group);
 

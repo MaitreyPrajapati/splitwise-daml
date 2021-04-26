@@ -8,9 +8,3 @@ template Transaction with
   where
     signatory lender
     observer borrower
-
-    nonconsuming choice DeleteTransaction: () with
-      controller lender
-      do
-        archive self
-        

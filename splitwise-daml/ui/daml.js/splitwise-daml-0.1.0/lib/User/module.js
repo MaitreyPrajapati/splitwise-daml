@@ -43,7 +43,7 @@ exports.Follow = {
 
 
 exports.User = {
-  templateId: '5c83130736076f7c4d74bf04510317d4df8db68d5ad00b11fd50d5a0c52948e9:User:User',
+  templateId: '3e1ff153922426dd892a88edb76ce5152b4a4ce97cf97939000e6b5b025557cc:User:User',
   keyDecoder: damlTypes.lazyMemo(function () { return damlTypes.lazyMemo(function () { return damlTypes.Party.decoder; }); }),
   keyEncode: function (__typed__) { return damlTypes.Party.encode(__typed__); },
   decoder: damlTypes.lazyMemo(function () { return jtv.object({username: damlTypes.Party.decoder, following: damlTypes.List(damlTypes.Party).decoder, }); }),

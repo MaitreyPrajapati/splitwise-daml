@@ -9,15 +9,6 @@ import * as damlLedger from '@daml/ledger';
 
 import * as pkgd14e08374fc7197d6a0de468c968ae8ba3aadbf9315476fd39071831f5923662 from '@daml.js/d14e08374fc7197d6a0de468c968ae8ba3aadbf9315476fd39071831f5923662';
 
-export declare type DeleteTransaction = {
-};
-
-export declare const DeleteTransaction:
-  damlTypes.Serializable<DeleteTransaction> & {
-  }
-;
-
-
 export declare type Transaction = {
   lender: damlTypes.Party;
   borrower: damlTypes.Party;
@@ -25,9 +16,8 @@ export declare type Transaction = {
 };
 
 export declare const Transaction:
-  damlTypes.Template<Transaction, undefined, '5c83130736076f7c4d74bf04510317d4df8db68d5ad00b11fd50d5a0c52948e9:Transaction:Transaction'> & {
+  damlTypes.Template<Transaction, undefined, '3e1ff153922426dd892a88edb76ce5152b4a4ce97cf97939000e6b5b025557cc:Transaction:Transaction'> & {
   Archive: damlTypes.Choice<Transaction, pkgd14e08374fc7197d6a0de468c968ae8ba3aadbf9315476fd39071831f5923662.DA.Internal.Template.Archive, {}, undefined>;
-  DeleteTransaction: damlTypes.Choice<Transaction, DeleteTransaction, {}, undefined>;
 };
 
 export declare namespace Transaction {

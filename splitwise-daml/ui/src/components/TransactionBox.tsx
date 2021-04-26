@@ -65,7 +65,7 @@ const MessageEdit: React.FC<Props> = ({ followers }) => {
         type="submit"
         disabled={isSubmitting || borrower === undefined || amount === ""}
         loading={isSubmitting}
-        content="Send"
+        content="Create Transaction"
       />
     </Form>
   );

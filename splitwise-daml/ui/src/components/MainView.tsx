@@ -22,6 +22,7 @@ import UserList from "./UserList";
 import PartyListEdit from "./PartyListEdit";
 import TransactionList from "./TransactionsList";
 import TransactionBox from "./TransactionBox";
+import GroupBox from "./GroupBox";
 
 // USERS_BEGIN
 const MainView: React.FC = () => {
@@ -107,6 +108,8 @@ const MainView: React.FC = () => {
               {/* USERLIST_END */}
             </Segment>
           </Grid.Column>
+        </Grid.Row>
+        <Grid.Row>
           <Grid.Column>
             <Segment>
               <Header as="h2">
@@ -123,6 +126,19 @@ const MainView: React.FC = () => {
               />
               <Divider />
               <TransactionList />
+            </Segment>
+          </Grid.Column>
+          <Grid.Column>
+            <Segment>
+              <Header as="h2">
+                <Icon name="pencil square" />
+                <Header.Content>
+                  Groups
+                  <Header.Subheader>Create a Group</Header.Subheader>
+                </Header.Content>
+              </Header>
+              <GroupBox followers={followers} />
+              <Divider />
             </Segment>
           </Grid.Column>
         </Grid.Row>
