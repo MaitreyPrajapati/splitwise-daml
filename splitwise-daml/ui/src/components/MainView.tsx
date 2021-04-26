@@ -125,7 +125,7 @@ const MainView: React.FC = () => {
                 <Header.Content>
                   Transactions
                   <Header.Subheader>
-                    Make a transaction with a follower
+                    Make a transaction with a follower or a group
                   </Header.Subheader>
                 </Header.Content>
               </Header>

@@ -1,13 +1,7 @@
 import React from "react";
-import { Button, Form, Icon, List, ListItem } from "semantic-ui-react";
-import { User, Transaction, Group } from "@daml.js/splitwise-daml";
-import { ContractId, Party } from "@daml/types";
-import {
-  useStreamQuery,
-  useStreamFetchByKeys,
-  useParty,
-  useLedger,
-} from "@daml/react";
+import { Button, Form } from "semantic-ui-react";
+import { User, Group } from "@daml.js/splitwise-daml";
+import { useParty, useLedger } from "@daml/react";
 import Select from "react-select";
 
 type Props = {
@@ -21,6 +15,7 @@ const GroupBox: React.FC<Props> = ({ followers }) => {
 
   const ledger = useLedger();
 
+  // List for all the connections
   const options = followers.map((follower) => ({
     value: follower.username,
     label: follower.username,
@@ -32,9 +27,9 @@ const GroupBox: React.FC<Props> = ({ followers }) => {
     setIsSelected((prev) => newGroupMembers);
   };
 
+  // Creating a group if a similar group doesn't already exist, key for the contract is everyone in the group
   const submitMessage = async (event: React.FormEvent) => {
     event.preventDefault();
-
     try {
       await ledger.create(Group.Group, {
         lender,
@@ -50,7 +45,7 @@ const GroupBox: React.FC<Props> = ({ followers }) => {
   };
 
   return (
-    <Form onSubmit={submitMessage}>
+    <Form onSubmit={(event) => submitMessage(event)}>
       <Select
         isMulti
         options={options}
@@ -61,6 +56,7 @@ const GroupBox: React.FC<Props> = ({ followers }) => {
       <Form.Input
         className="test-select-message-content"
         placeholder="Group name"
+        value={groupName}
         onChange={(event: any) => {
           setGroupName(event.currentTarget.value);
         }}
@@ -69,7 +65,9 @@ const GroupBox: React.FC<Props> = ({ followers }) => {
         fluid
         className="test-select-message-send-button"
         type="submit"
-        disabled={groupName === "" || isSelected === []}
+        disabled={
+          groupName === "" || isSelected === [] || isSelected.length < 2
+        }
         content="Create Transaction"
       />
     </Form>

@@ -20,14 +20,15 @@ const MessageEdit: React.FC<Props> = ({ followers, allGroups }) => {
   const [isGroup, setIsGroup] = React.useState(false);
   const ledger = useLedger();
 
+  // Followers for the selection
   let transactionTargetOptions = followers.map((follower) => ({
     key: follower,
     text: follower,
     value: follower,
   }));
 
+  // Groups for the selection
   const groupNames = allGroups.map((group) => group.groupName);
-
   let allGroupsTragetOptions = allGroups.map((group) => ({
     key: group.groupName,
     text: group.groupName,
@@ -35,17 +36,23 @@ const MessageEdit: React.FC<Props> = ({ followers, allGroups }) => {
     isgroup: true,
   }));
 
+  // Every possible target for the transaction
   transactionTargetOptions = transactionTargetOptions.concat(
     allGroupsTragetOptions
   );
 
-  const submitMessage = async (event: React.FormEvent) => {
+  const setAmountForTrnsaction = (event: any) => {
+    setAmount(event.currentTarget.value);
+  };
+
+  // Submitting a transaction
+  const submitTransaction = async (event: React.FormEvent) => {
     try {
+      // If user decides to make a group transaction
       if (isGroup) {
         return submitGroupTransaction(event);
       }
       event.preventDefault();
-      console.log("Here", borrower);
       if (borrower === undefined) {
         return;
       }
@@ -63,11 +70,11 @@ const MessageEdit: React.FC<Props> = ({ followers, allGroups }) => {
     }
   };
 
+  // Submitting a transaction with the group
   const submitGroupTransaction = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
       event.preventDefault();
-      console.log("Group", borrower);
       if (borrower === undefined) {
         return;
       }
@@ -86,16 +93,12 @@ const MessageEdit: React.FC<Props> = ({ followers, allGroups }) => {
     }
   };
 
-  const setAmountForTrnsaction = (event: any) => {
-    setAmount(event.currentTarget.value);
-  };
-
   return (
-    <Form onSubmit={submitMessage}>
+    <Form onSubmit={submitTransaction}>
       <Form.Dropdown
         selection
         className="test-select-message-receiver"
-        placeholder="Select your friend"
+        placeholder="Select your friend or a group"
         options={transactionTargetOptions}
         value={borrower}
         onChange={(event) => {

@@ -1,7 +1,6 @@
 import React from "react";
 import { Icon, List, ListItem } from "semantic-ui-react";
 import { User, Transaction } from "@daml.js/splitwise-daml";
-import { ContractId } from "@daml/types";
 import {
   useStreamQuery,
   useStreamFetchByKeys,
@@ -13,6 +12,7 @@ import {
  * React component displaying the list of messages for the current user.
  */
 
+// Generates the transaction list for a user
 const TransactionList: React.FC = () => {
   const allTransactions = useStreamQuery(Transaction.Transaction);
   const username = useParty();
@@ -28,7 +28,7 @@ const TransactionList: React.FC = () => {
     return debt < 0 ? "red" : "green";
   };
 
-  // Delete a contract
+  // Delete the transaction contract
   const deleteTransaction = async (transactionContractId: string) => {
     const archiveEvent = await ledger.archive(
       Transaction.Transaction,

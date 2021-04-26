@@ -9,7 +9,7 @@ template Group with
   where
     signatory lender
 
-    key lender: Party
+    key (lender::involvedParties): [Party]
     maintainer key
 
     nonconsuming choice MakeGroupTransaction: () with
