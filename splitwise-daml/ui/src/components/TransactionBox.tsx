@@ -28,6 +28,7 @@ const MessageEdit: React.FC<Props> = ({ followers, allGroups }) => {
   }));
 
   // Groups for the selection
+
   const groupNames = allGroups.map((group) => group.groupName);
   let allGroupsTragetOptions = allGroups.map((group) => ({
     key: group.groupName,
@@ -78,7 +79,9 @@ const MessageEdit: React.FC<Props> = ({ followers, allGroups }) => {
       if (borrower === undefined) {
         return;
       }
+
       setIsSubmitting(true);
+
       await ledger.exerciseByKey(Group.Group.MakeGroupTransaction, lender, {
         currGroupName: borrower,
         totalAmount: amount,

@@ -1,6 +1,7 @@
 module Group where
 
 import Transaction
+type GroupContractKey = (Party, Text)
 
 template Group with
     lender: Party
@@ -9,7 +10,7 @@ template Group with
   where
     signatory lender
 
-    key (lender::involvedParties): [Party]
+    key lender : Party
     maintainer key
 
     nonconsuming choice MakeGroupTransaction: () with
@@ -17,7 +18,7 @@ template Group with
         totalAmount: Decimal
       controller lender
       do
-        assertMsg "There is something wrong with the group selection" (currGroupName == groupName)
+        assertMsg "There is something wrong with the group" (currGroupName == groupName)
         let individualAmount = totalAmount / (intToDecimal (length involvedParties))
         forA involvedParties $ \borrower -> create Transaction with lender=lender, borrower=borrower, amount=individualAmount       
         return ()

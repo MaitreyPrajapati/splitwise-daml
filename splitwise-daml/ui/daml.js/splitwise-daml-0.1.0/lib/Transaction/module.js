@@ -16,7 +16,7 @@ var pkgd14e08374fc7197d6a0de468c968ae8ba3aadbf9315476fd39071831f5923662 = requir
 
 
 exports.Transaction = {
-  templateId: '4e06debd8433252c6774258551a323596c51e1b61458250797d476b4763a88bb:Transaction:Transaction',
+  templateId: '8065e0b8c30c043350a272375b1ed7094e0ebafca2db12b6069b03759d0d7dc8:Transaction:Transaction',
   keyDecoder: damlTypes.lazyMemo(function () { return jtv.constant(undefined); }),
   keyEncode: function () { throw 'EncodeError'; },
   decoder: damlTypes.lazyMemo(function () { return jtv.object({lender: damlTypes.Party.decoder, borrower: damlTypes.Party.decoder, amount: damlTypes.Numeric(10).decoder, }); }),

@@ -47,12 +47,6 @@ const MainView: React.FC = () => {
   const allGroupContracts = useStreamQueries(Group.Group).contracts;
   const allGroups = allGroupContracts.map((group) => group.payload);
 
-  // const allGroups = useMemo(
-  //   () =>
-  //     allGroupContracts
-  //       .map((group) => group.payload)
-  //   [allUsers, username]
-  // );
   const ledger = useLedger();
 
   const follow = async (userToFollow: Party): Promise<boolean> => {

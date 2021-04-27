@@ -1,7 +1,12 @@
 import React from "react";
 import { Button, Form } from "semantic-ui-react";
 import { User, Group } from "@daml.js/splitwise-daml";
-import { useParty, useLedger } from "@daml/react";
+import {
+  useStreamQuery,
+  useStreamFetchByKeys,
+  useParty,
+  useLedger,
+} from "@daml/react";
 import Select from "react-select";
 
 type Props = {
@@ -15,7 +20,6 @@ const GroupBox: React.FC<Props> = ({ followers }) => {
 
   const ledger = useLedger();
 
-  // List for all the connections
   const options = followers.map((follower) => ({
     value: follower.username,
     label: follower.username,
@@ -27,7 +31,6 @@ const GroupBox: React.FC<Props> = ({ followers }) => {
     setIsSelected((prev) => newGroupMembers);
   };
 
-  // Creating a group if a similar group doesn't already exist, key for the contract is everyone in the group
   const submitMessage = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
